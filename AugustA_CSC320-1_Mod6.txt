@@ -1,0 +1,121 @@
+private static void addVehicle(Dealership dealership, Scanner scanner) {
+        System.out.print("Enter make: ");
+        String make = scanner.nextLine();
+        System.out.print("Enter model: ");
+        String model = scanner.nextLine();
+        System.out.print("Enter color: ");
+        String color = scanner.nextLine();
+        int year = getIntInput(scanner, "Enter year: ", "Invalid input for year. Please enter a valid number.");
+        int mileage = getIntInput(scanner, "Enter mileage: ", "Invalid input for mileage. Please enter a valid number.");
+        if (year == -1 || mileage == -1) return;
+        dealership.addVehicle(new Automobile(make, model, color, year, mileage));
+        System.out.println("Vehicle added successfully.");
+    }
+
+when called from Main:
+OUTPUT "Enter make: " make <- USERINPUT
+OUTPUT "Enter model: " model <- USERINPUT
+OUTPUT "Enter color: " color <- USERINPUT
+OUTPUT "Enter year: " year <- USERINPUT
+	IF ValueError, OUTPUT "Invalid input for year. Please enter a valid number."
+OUTPUT "Enter mileage: " mileage <- USERINPUT
+	IF ValueError, OUTPUT "Invalid input for mileage. Please enter a valid number."
+call func 'dealership.addVehicle' for new 'Automobile'
+OUTPUT "Vehicle added successfully."
+
+————————————————————————
+public void removeVehicle(String make, String model) {
+        Iterator<Automobile> iterator = inventory.iterator();
+        while (iterator.hasNext()) {
+            Automobile vehicle = iterator.next();
+            if (vehicle.getMake().equals(make) && vehicle.getModel().equals(model)) {
+                iterator.remove();
+                System.out.println("Vehicle " + make + " " + model + " removed from inventory.");
+                return;
+            }
+        }
+        System.out.println("Vehicle " + make + " " + model + " not found in inventory.");
+    }
+
+when called from Main:
+IF vehicle 'make' AND 'model' found
+	clear data 'vehicle' in 'inventory'
+	OUTPUT "Vehicle {make} {model} removed from inventory."
+ELSE
+	OUTPUT "Vehicle {make} {model} not found in inventory." }
+
+————————————————————————
+public void updateVehicle(String make, String model) {
+        Scanner scanner = new Scanner(System.in);
+        for (Automobile vehicle : inventory) {
+            if (vehicle.getMake().equals(make) && vehicle.getModel().equals(model)) {
+                System.out.println("Which attribute do you want to update?");
+                System.out.println("1. Make\n2. Model\n3. Color\n4. Year\n5. Mileage");
+                int choice = getIntInput(scanner, "Invalid choice. Please enter a number between 1 and 5.", 1, 5);
+                if (choice == -1) return;
+
+                switch (choice) {
+                    case 1: vehicle.setMake(scanner.nextLine()); break;
+                    case 2: vehicle.setModel(scanner.nextLine()); break;
+                    case 3: vehicle.setColor(scanner.nextLine()); break;
+                    case 4: vehicle.setYear(getIntInput(scanner, "Invalid input. Please enter a valid year.", Integer.MIN_VALUE, Integer.MAX_VALUE)); break;
+                    case 5: vehicle.setMileage(getIntInput(scanner, "Invalid input. Please enter a valid mileage.", Integer.MIN_VALUE, Integer.MAX_VALUE)); break;
+                }
+                System.out.println("Vehicle attributes updated successfully.");
+                return;
+            }
+        }
+        System.out.println("Vehicle " + make + " " + model + " not found in inventory.");
+    }
+
+when called from Main:
+OUTPUT "Which attribute do you want to update?" 
+OUTPUT "1. Make"
+OUTPUT "2. Model"
+OUTPUT "3. Color"
+OUTPUT "4. Year"
+OUTPUT "5. Mileage"
+get USERINPUT; {
+	IF USERINPUT == 1, setMake <- USERINPUT
+	IF USERINPUT == 2, setModel <- USERINPUT
+	IF USERINPUT == 3, setColor <- USERINPUT
+	IF USERINPUT == 4, setYear <- USERINPUT
+		IF invalidValue
+			OUTPUT "Invalid input. Please enter a valid year."
+	IF USERINPUT == 5, setMileage <- USERINPUT
+		IF invalidValue
+			OUTPUT "Invalid input. Please enter a valid mileage."
+	ELSE OUTPUT "Vehicle attributes updated successfully."
+	EXCEPT OUTPUT "Vehicle {make} {model} not found in inventory." }
+————————————————————————
+public void displayInventory() {
+        for (int i = 0; i < inventory.size(); i++) {
+            Automobile vehicle = inventory.get(i);
+            System.out.println((i + 1) + ". Make: " + vehicle.getMake() + ", Model: " + vehicle.getModel() + 
+                    ", Color: " + vehicle.getColor() + ", Year: " + vehicle.getYear() + ", Mileage: " + vehicle.getMileage());
+        }
+    }
+
+when called from Main:
+for each 'vehicle' in 'inventory'
+	OUTPUT "{i}. Make: {vehicle.getMake()}, Model: {vehicle.getModel()}, Color: {vehicle.getColor()}, " "Year: {vehicle.getYear()}, Mileage: {vehicle.getMileage()}"
+————————————————————————
+public void saveToFile(String filename) {
+        try (FileWriter fileWriter = new FileWriter(filename + ".txt")) {
+            for (Automobile vehicle : inventory) {
+                fileWriter.write(String.format("Make: %s, Model: %s, Color: %s, Year: %d, Mileage: %d%n",
+                        vehicle.getMake(), vehicle.getModel(), vehicle.getColor(), vehicle.getYear(), vehicle.getMileage()));
+            }
+            System.out.println("Inventory saved to " + filename + ".txt");
+        } catch (IOException e) {
+            System.out.println("Error saving to file: " + e.getMessage());
+        }
+    }
+
+when called from Main:
+using FileWriter:
+	create ()'filename' + ".txt") as file
+	write "Make: 'make', Model: 'model', Color: 'color', Year: 'year', Mileage: 'mileage'"
+OUTPUT "Inventory saved to " + 'filename' + ".txt"
+IF write error
+	OUTPUT "Error saving to file: " + e.getMessage()
