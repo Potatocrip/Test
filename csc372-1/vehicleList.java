@@ -1,15 +1,13 @@
-import java.io.FileWriter;
 import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.Comparator;
+import java.io.FileWriter;
 import java.io.IOException;
 
 class Vehicle {
     private String make;
     private String model;
     private double milesPerGallon;
-
-    // Vehicle object with constructor & toString for easy printing
 
     public Vehicle(String make, String model, double milesPerGallon) {
         this.make = make;
@@ -28,9 +26,6 @@ class Vehicle {
 }
 
 class MilesPerGallonComparator implements Comparator<Vehicle> {
-
-    // Compares two Vehicle objects based on mpg in ascending order
-
     @Override
     public int compare(Vehicle v1, Vehicle v2) {
         return Double.compare(v1.getMilesPerGallon(), v2.getMilesPerGallon());
@@ -77,8 +72,6 @@ public class vehicleList {
             return;
         }
 
-        // Recursively divides ArrayList into two halves, 'left' and 'right', until reaching the base case
-
         int mid = list.size() / 2;
         LinkedList<Vehicle> left = new LinkedList<>(list.subList(0, mid));
         LinkedList<Vehicle> right = new LinkedList<>(list.subList(mid, list.size()));
@@ -91,8 +84,6 @@ public class vehicleList {
 
     private static void merge(LinkedList<Vehicle> list, LinkedList<Vehicle> left, LinkedList<Vehicle> right, Comparator<Vehicle> comparator) {
         int i = 0, j = 0, k = 0;
-
-        // Recursively compares & merges lists
 
         while (i < left.size() && j < right.size()) {
             if (comparator.compare(left.get(i), right.get(j)) <= 0) {

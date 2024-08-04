@@ -1,0 +1,5 @@
+Make: e, Model: f, MPG: 1.0
+Make: a, Model: b, MPG: 12.0
+Make: g, Model: h, MPG: 19.42
+Make: c, Model: d, MPG: 124.0
+Make: i, Model: j, MPG: 191919.0
