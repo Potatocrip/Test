@@ -28,9 +28,9 @@ class Vehicle {
 }
 
 class MilesPerGallonComparator implements Comparator<Vehicle> {
-    
+
     // Compares two Vehicle objects based on mpg in ascending order
-    
+
     @Override
     public int compare(Vehicle v1, Vehicle v2) {
         return Double.compare(v1.getMilesPerGallon(), v2.getMilesPerGallon());
@@ -66,6 +66,8 @@ public class vehicleList {
         for (Vehicle vehicle : vehicles) {
             System.out.println(vehicle);
         }
+
+        writeToFile(vehicles, "vehicles.txt");
 
         scanner.close();
     }
@@ -109,12 +111,12 @@ public class vehicleList {
         }
     }
 
-    private static void writeToFile(LinkedList<Vehicle> vehicles, String filename) {
-        try (FileWriter writer = new FileWriter(filename + ".txt")) {
+    private static void writeToFile(LinkedList<Vehicle> vehicles, String fileName) {
+        try (FileWriter writer = new FileWriter(fileName)) {
             for (Vehicle vehicle : vehicles) {
-                writer.write(vehicle.toString() + "\n");
+                writer.write(vehicle.toString() + System.lineSeparator());
             }
-            System.out.println("Vehicles written to file: " + filename + ".txt");
+            System.out.println("\nVehicles list has been written to " + fileName);
         } catch (IOException e) {
             System.err.println("Error writing to file: " + e.getMessage());
         }
