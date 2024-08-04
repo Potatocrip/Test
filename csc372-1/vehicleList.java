@@ -110,11 +110,11 @@ public class vehicleList {
     }
 
     private static void writeToFile(LinkedList<Vehicle> vehicles, String filename) {
-        try (FileWriter writer = new FileWriter(filename)) {
+        try (FileWriter writer = new FileWriter(filename + ".txt")) {
             for (Vehicle vehicle : vehicles) {
                 writer.write(vehicle.toString() + "\n");
             }
-            System.out.println("Vehicles written to file: " + filename);
+            System.out.println("Vehicles written to file: " + filename + ".txt.");
         } catch (IOException e) {
             System.err.println("Error writing to file: " + e.getMessage());
         }
