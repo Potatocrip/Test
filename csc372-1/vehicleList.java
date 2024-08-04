@@ -114,7 +114,7 @@ public class vehicleList {
             for (Vehicle vehicle : vehicles) {
                 writer.write(vehicle.toString() + "\n");
             }
-            System.out.println("Vehicles written to file: " + filename + ".txt.");
+            System.out.println("Vehicles written to file: " + filename + ".txt");
         } catch (IOException e) {
             System.err.println("Error writing to file: " + e.getMessage());
         }
