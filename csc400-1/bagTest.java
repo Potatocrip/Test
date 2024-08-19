@@ -14,21 +14,16 @@ public class bagTest {
         // Prints contents
         myBag.printContents();
 
-        // Checks if bag contains certain elements
+        // Checks for an orange and apple 
         System.out.println("\nDoes the bag contain 'orange'? " + myBag.contains("orange"));
-        System.out.println("Does the bag contain 'grape'? " + myBag.contains("grape"));
+        System.out.println("\nDoes the bag contain 'apple'? " + myBag.contains("apple"));
 
-        // Gets counts of a few elements
-        String targetItem = "apple";
-        int count = myBag.getCount(targetItem);
-        System.out.println("Count of '" + targetItem + "': " + count);
-
-        String targetItem = "orange";
-        int count = myBag.getCount(targetItem);
-        System.out.println("Count of '" + targetItem + "': " + count);
+        // Gets count
+        System.out.println("\nGetting counts for multiple items:");
+        myBag.getCount("apple").getCount("orange");
 
         // Removes an orange
-        System.out.println("\nRemoving a 'banana'...");
+        System.out.println("\nRemoving an 'orange'...");
         myBag.remove("orange");
 
 	// Prints again
@@ -37,5 +32,8 @@ public class bagTest {
         // Checks again to make sure orange was removed
         System.out.println("\nDoes the bag contain 'orange'? " + myBag.contains("orange"));
 
+        // Gets count for orange
+        System.out.println("\nGetting count for orange:");
+        myBag.getCount("orange");
     }
 }

@@ -31,8 +31,10 @@ public class Bag<T> {
     }
 
     // Gets count of an item in the bag
-    public int getCount(T item) {
-        return items.getOrDefault(item, 0);
+    public Bag<T> getCount(T item) {
+        int count = items.getOrDefault(item, 0);
+        System.out.println(item + ": " + count);
+        return this;
     }
 
     // Prints contents
