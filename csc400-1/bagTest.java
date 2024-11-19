@@ -1,4 +1,4 @@
-public class bagTest {
+public class BagTest {
     public static void main(String[] args) {
         // Creates bags
         Bag<String> myBag = new Bag<>();
