@@ -1,0 +1,10 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "taskLabel": "task-CT2",
+      "appliesTo": "csc450-1/CT2.cpp",
+      "type": "launch"
+    }
+  ]
+}
